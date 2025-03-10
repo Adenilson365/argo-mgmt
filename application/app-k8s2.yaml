@@ -1,0 +1,20 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: app-k8s2
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://github.com/Adenilson365/argo-deploy.git'
+#     targetRevision: HEAD
+#     path: app 
+#   destination:
+#     server: 'https://34.139.156.161'
+#     namespace: web
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     - CreateNamespace=true

@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-blue-green
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Adenilson365/argo-deploy.git'
+    targetRevision: HEAD
+    path: app-blue-green 
+    directory:
+      recurse: true
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: web
+  syncPolicy:
+    automated:
+        prune: true
+        selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

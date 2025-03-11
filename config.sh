@@ -16,17 +16,21 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 echo "ArgoCD password: $(cat argo-pass.pass)"
 
-gcloud container clusters get-credentials devops-labs01-1 \
-    --region=us-east1 
+kubectl create namespace argo-rollouts
 
-kubectl create clusterrolebinding cluster-admin-binding \
-  --clusterrole cluster-admin \
-  --user $(gcloud config get-value account)
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+
+# gcloud container clusters get-credentials devops-labs01-1 \
+#     --region=us-east1 
+
+# kubectl create clusterrolebinding cluster-admin-binding \
+#   --clusterrole cluster-admin \
+#   --user $(gcloud config get-value account)
 
 
-gcloud container clusters get-credentials devops-labs01-2 \
-    --region=us-east1 
+# gcloud container clusters get-credentials devops-labs01-2 \
+#     --region=us-east1 
 
-kubectl create clusterrolebinding cluster-admin-binding \
-  --clusterrole cluster-admin \
-  --user $(gcloud config get-value account)
+# kubectl create clusterrolebinding cluster-admin-binding \
+#   --clusterrole cluster-admin \
+#   --user $(gcloud config get-value account)
